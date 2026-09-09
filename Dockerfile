@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx:alpine3.24
 
 # Copy custom external nginx configuration
 COPY nginx/nginx.conf /etc/nginx/nginx.conf

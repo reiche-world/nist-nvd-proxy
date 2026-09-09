@@ -1,0 +1,40 @@
+name: Build
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  issues: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  build-oci-image:
+    name: Build OCI image
+    runs-on: ubuntu-latest
+    permissions: write-all
+    if: |
+      github.event.pull_request.draft == false
+      && (
+        needs.determine_changes.outputs.project == 'true'
+        || needs.determine_changes.outputs.source == 'true'
+        || needs.determine_changes.outputs.container == 'true'
+      )
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/build-container
+        with:
+          user: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}

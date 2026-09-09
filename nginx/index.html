@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIST NVD Proxy</title>
+    <script>
+        addEventListener("load", (event) => {
+            document.getElementById("server").innerHTML = window.location.protocol + "//" + window.location.host;
+        })
+    </script>
+</head>
+<body>
+    <h1>NIST NVD Proxy Cache</h1>
+    <p>24h proxy cache for <a href="https://nvd.nist.gov/feeds/">NIST NVD Feeds</a>.</p>
+    <p>Just call <span id="server"></span>/feeds/json/cve/2.0/nvdcve-2.0-2019.json.gz to get a cached file.</p>
+    <p>The source code can be found here: <a href="https://github.com/reiche-world/nist-nvd-proxy">https://github.com/reiche-world/nist-nvd-proxy</a></p>
+</body>
+</html>

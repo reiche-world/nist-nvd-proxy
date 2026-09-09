@@ -3,13 +3,19 @@ Nginx proxy cache for https://nvd.nist.gov/feeds/
 
 ## Usage
 
+Create a cache directory:
+
 ```shell
 mkdir cache
+```
 
-podman run --rm --name "nist-nvd-proxy" \
+Run the container:
+
+```shell
+podman|docker run --rm --name "nist-nvd-proxy" \
   -p 8090:80 \
   -v"$(pwd)/cache:/var/cache/nginx" \
-  ghcr.io/reiche.world/nist-nvd-proxy:latest
+  ghcr.io/reiche-world/nist-nvd-proxy:main
 ```
 
 Download a file:
